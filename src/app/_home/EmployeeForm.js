@@ -5,6 +5,7 @@ import PersonalDetails from './PersonalDetails';
 import BasicDetails from './BasicDetails';
 import validateEmployeeForm from '../utils/Validation';
 import SubmitSection from './SubmitSection';
+import { toast } from 'react-toastify';
 
 export default function EmployeeForm({ onEmployeeSubmit }) {
   const [formData, setFormData] = useState({
@@ -60,11 +61,10 @@ export default function EmployeeForm({ onEmployeeSubmit }) {
         });
 
         setErrors({});
-        setSuccessMessage('Employee created successfully!');
-        setTimeout(() => setSuccessMessage(''), 3000);
+        toast.success('Employee created successfully!');
       } catch (error) {
         console.error('Error creating employee:', error);
-        alert('Error creating employee. Please try again.');
+        toast.error('Error creating employee. Please try again.');
       }
     } else {
       setErrors(validationErrors);
@@ -94,12 +94,6 @@ export default function EmployeeForm({ onEmployeeSubmit }) {
       <h2 className="text-lg font-semibold text-gray-900 mb-6">
         Employee Details
       </h2>
-
-      {successMessage && (
-        <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-md">
-          <p className="text-green-800 text-sm">{successMessage}</p>
-        </div>
-      )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <BasicDetails 

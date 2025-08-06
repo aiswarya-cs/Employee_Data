@@ -6,6 +6,8 @@ import EmployeeForm from './_home/EmployeeForm';
 import EmployeeTable from './_home/EmployeeTable';
 import FormHeader from './_home/FormHeader';
 
+const TABS = ['Employee Details', 'Address', 'Skill Set'];
+
 export default function Home() {
   const [employees, setEmployees] = useState([
     {
@@ -16,6 +18,8 @@ export default function Home() {
       checked: false
     }
   ]);
+
+  const [activeTab, setActiveTab] = useState(TABS[0]);
 
   const addEmployee = (newEmployee) => {
     const employeeWithId = {
@@ -33,11 +37,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
       <main className="w-full">
-        <FormHeader />
+        <FormHeader activeTab={activeTab} onTabChange={setActiveTab} />
         <div>
-          <EmployeeForm onEmployeeSubmit={addEmployee} />
+          <EmployeeForm onEmployeeSubmit={addEmployee} activeTab={activeTab} />
           <EmployeeTable employees={employees} onEmployeesUpdate={updateEmployees} />
         </div>
       </main>
