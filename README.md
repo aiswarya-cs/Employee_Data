@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Employee Creation Application
+
+## Features
+
+- **Responsive Design**: Fully responsive UI that works across all devices
+- **Modular Components**: Clean, reusable component architecture
+- **Form Validation**: Built-in form validation and error handling
+- **Search Functionality**: Real-time search through employee records
+- **Modern UI**: Clean, professional interface with smooth animations
+- **Accessibility**: WCAG compliant with proper focus management
+
+## Components
+
+### Header Component (`src/components/Header.js`)
+- Navigation tabs for Employee Master and Employee Creation
+- Back navigation button
+- Sub-navigation for different sections (Employee Details, Address, Skill Set)
+
+### EmployeeForm Component (`src/components/EmployeeForm.js`)
+- Comprehensive employee information form
+- Personal details section
+- Privacy policy acknowledgment
+- Form validation and submission handling
+
+### EmployeeTable Component (`src/components/EmployeeTable.js`)
+- Searchable employee records table
+- Action buttons for filtering, adding, downloading, and uploading
+- Edit and delete functionality for individual records
+- Responsive table with horizontal scrolling on mobile
+
+### FormField Component (`src/components/FormField.js`)
+- Reusable form field component
+- Supports text inputs, select dropdowns, and other input types
+- Consistent styling and validation
+
+## Technology Stack
+
+- **Framework**: Next.js 15
+- **UI Library**: React 19
+- **Styling**: Tailwind CSS 4
+- **Font**: Geist Sans (Google Fonts)
 
 ## Getting Started
 
-First, run the development server:
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+2. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Open Application**:
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── globals.css          # Global styles and Tailwind imports
+│   ├── layout.js            # Root layout component
+│   └── page.js              # Main page component
+└── components/
+│    ├── Header.js            # Navigation and header component
+│    ├── EmployeeForm.js      # Employee creation form
+│    ├── EmployeeTable.js     # Employee records table
+│    └── FormField.js         # Reusable form field component
+└── _home/
+│  
+│
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Responsive Design
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+The application is fully responsive with breakpoints:
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: > 1024px
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Form Fields
 
-## Learn More
+### Required Fields
+- Employee ID (auto-generated)
+- Employee Type
+- First Name
+- Last Name
 
-To learn more about Next.js, take a look at the following resources:
+### Optional Fields
+- Middle Name
+- Mobile Phone
+- Home Phone
+- Personal Email
+- Physically Handicapped
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Available Scripts
 
-## Deploy on Vercel
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Code Style
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Follows React best practices
+- Uses functional components with hooks
+- Consistent naming conventions
+- Proper TypeScript-like prop validation
+
+## Future Enhancements
+
+- [ ] Address and Skill Set tabs implementation
+- [ ] Data persistence with backend API
+- [ ] Advanced filtering and sorting
+- [ ] Bulk operations
+- [ ] Export to PDF/Excel
+- [ ] User authentication
+- [ ] Role-based access control
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
