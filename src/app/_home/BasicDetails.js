@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FormField from '@/components/FormField'
 
 const BasicDetails = ({ formData, handleInputChange, errors = {} }) => {
-
   const employeeTypeOptions = [
     { value: 'Own', label: 'Own' },
     { value: 'Contract', label: 'Contract' },
@@ -10,7 +9,7 @@ const BasicDetails = ({ formData, handleInputChange, errors = {} }) => {
   ];
 
   return (
-    <div><div className="flex flex-col space-y-4">
+    <div className="flex flex-col space-y-4">
       <div className='flex flex-col md:flex-row md:justify-start gap-8 mb-3'>
         <div className="flex flex-col">
           <FormField
@@ -18,12 +17,13 @@ const BasicDetails = ({ formData, handleInputChange, errors = {} }) => {
             name="employeeId"
             type="text"
             value={formData.employeeId}
-            className={`2xl:w-[350px] xl:w-[320px] lg:w-[220px] md:w-[160px] w-full h-[50px] text-black
+            className={`2xl:w-[350px] xl:w-[320px] lg:w-[220px] md:w-[160px] w-full h-[50px] bg-blue-50 text-black
              px-2 border rounded-md 
              ${errors.employeeId ? 'border-red-500' : 'border-gray-300'}`}
             onChange={handleInputChange}
+            disabled ={true}
             placeholder="Employee ID"
-            required
+            
           />
           {errors.employeeId && (
             <span className="text-red-500 text-sm mt-1">{errors.employeeId}</span>
@@ -99,7 +99,7 @@ const BasicDetails = ({ formData, handleInputChange, errors = {} }) => {
           )}
         </div>
       </div>
-    </div></div>
+    </div>
   )
 }
 

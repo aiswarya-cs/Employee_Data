@@ -1,92 +1,44 @@
 'use client';
 
-import { useState } from 'react';
+import { useFormik } from 'formik';
 import PersonalDetails from './PersonalDetails';
 import BasicDetails from './BasicDetails';
 import validateEmployeeForm from '../utils/Validation';
 import SubmitSection from './SubmitSection';
 import { toast } from 'react-toastify';
 
+const employeeInitialValues = {
+  employeeId: '',
+  employeeType: 'Own',
+  firstName: '',
+  middleName: '',
+  lastName: '',
+  mobilePhone: '',
+  homePhone: '',
+  personalEmail: '',
+  physicallyHandicapped: ''
+};
+
 export default function EmployeeForm({ onEmployeeSubmit }) {
-  const [formData, setFormData] = useState({
-    employeeId: '',
-    employeeType: 'Own',
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    mobilePhone: '',
-    homePhone: '',
-    personalEmail: '',
-    physicallyHandicapped: ''
-  });
-
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const validationErrors = validateEmployeeForm(formData);
-    if (Object.keys(validationErrors).length === 0) {
+  const formik = useFormik({
+    initialValues: employeeInitialValues,
+    validate: validateEmployeeForm,
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
-        onEmployeeSubmit(formData);
-
-        setFormData({
-          employeeId: '',
-          employeeType: 'Own',
-          firstName: '',
-          middleName: '',
-          lastName: '',
-          mobilePhone: '',
-          homePhone: '',
-          personalEmail: '',
-          physicallyHandicapped: ''
-        });
-
-        setErrors({});
+        await onEmployeeSubmit(values);
         toast.success('Employee created successfully!');
+        resetForm();
       } catch (error) {
         console.error('Error creating employee:', error);
         toast.error('Error creating employee. Please try again.');
+      } finally {
+        setSubmitting(false);
       }
-    } else {
-      setErrors(validationErrors);
     }
-
-    setIsSubmitting(false);
-  };
+  });
 
   const handleCancel = () => {
-    setFormData({
-      employeeId: '',
-      employeeType: 'Own',
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      mobilePhone: '',
-      homePhone: '',
-      personalEmail: '',
-      physicallyHandicapped: ''
-    });
-    setErrors({});
-    setSuccessMessage('');
+    formik.resetForm();
   };
 
   return (
@@ -95,20 +47,23 @@ export default function EmployeeForm({ onEmployeeSubmit }) {
         Employee Details
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <BasicDetails 
-          formData={formData} 
-          handleInputChange={handleInputChange} 
-          errors={errors}
+      <form onSubmit={formik.handleSubmit} className="space-y-6">
+        <BasicDetails
+          formData={formik.values}
+          handleInputChange={formik.handleChange}
+          errors={formik.errors}
         />
-        <PersonalDetails 
-          formData={formData} 
-          handleInputChange={handleInputChange} 
-          errors={errors}
+        <PersonalDetails
+          formData={formik.values}
+          handleInputChange={formik.handleChange}
+          errors={formik.errors}
         />
 
-        <SubmitSection handleCancel={handleCancel} isSubmitting={isSubmitting} />
+        <SubmitSection
+          handleCancel={handleCancel}
+          isSubmitting={formik.isSubmitting}
+        />
       </form>
     </div>
   );
-};
+}

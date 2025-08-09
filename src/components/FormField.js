@@ -10,7 +10,8 @@ export default function FormField({
   onChange,
   placeholder,
   required = false,
-  options = [], className = ''
+  options = [], className = '',
+  disabled = false
 }) {
   return (
     <div>
@@ -34,6 +35,7 @@ export default function FormField({
           placeholder={placeholder}
           className={className}
           required={required}
+          disabled={disabled} 
         />
       )}
     </div>

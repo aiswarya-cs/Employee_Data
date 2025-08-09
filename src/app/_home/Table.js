@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TableHeader from './TableHeader'
 import TableRow from '@/components/TableRow'
 
 const Table = ({ employees, onEmployeesUpdate, searchTerm }) => {
+  useEffect(() => {
+  }, []); 
+
+
+  console.log("Employees:", employees);
+  
+
   const handleCheckboxChange = (id) => {
     const updatedEmployees = employees.map(emp =>
       emp.id === id ? { ...emp, checked: !emp.checked } : emp
@@ -19,7 +26,7 @@ const Table = ({ employees, onEmployeesUpdate, searchTerm }) => {
     onEmployeesUpdate(updatedEmployees);
   };
 
-  const filteredEmployees = employees.filter(emp =>
+  const filteredEmployees = employees?.filter(emp =>
     emp.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     emp.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     emp.employeeType.toLowerCase().includes(searchTerm.toLowerCase())
